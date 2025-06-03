@@ -1,0 +1,50 @@
+class User:
+    def __init__(self, username):
+        self.username = username
+        self.balance = 0
+        self.group_savings = {}
+
+    def add_to_balance(self, amount):
+        self.balance += amount
+        print(f"{amount} added to {self.username}'s balance. New balance: {self.balance}")
+
+    def create_group(self, group_name):
+        self.group_savings[group_name] = 0
+        print(f"Group '{group_name}' created.")
+
+    def contribute_to_group(self, group_name, amount):
+        if group_name in self.group_savings:
+            self.group_savings[group_name] += amount
+            print(f"{amount} contributed to group '{group_name}'. Total in group: {self.group_savings[group_name]}")
+        else:
+            print(f"Group '{group_name}' does not exist.")
+
+class Business:
+    def __init__(self, name, accepts_bitcoin):
+        self.name = name
+        self.accepts_bitcoin = accepts_bitcoin
+
+    def __str__(self):
+        return f"{self.name} (Accepts Bitcoin: {self.accepts_bitcoin})"
+
+def find_businesses(businesses):
+    print("Businesses that accept Bitcoin:")
+    for business in businesses:
+        if business.accepts_bitcoin:
+            print(business)
+
+# Example usage
+if __name__ == "__main__":
+    user = User("Alice")
+    user.add_to_balance(100)
+    user.create_group("Trip Fund")
+    user.contribute_to_group("Trip Fund", 50)
+
+    businesses = [
+        Business("Coffee Shop", True),
+        Business("Bookstore", False),
+        Business("Local Diner", True),
+    ]
+
+    find_businesses(businesses)
+    
